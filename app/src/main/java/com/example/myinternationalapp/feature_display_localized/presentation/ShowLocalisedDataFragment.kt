@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myinternationalapp.R
+import com.example.myinternationalapp.data.SupportedLocale
 import com.example.myinternationalapp.databinding.ShowLocalisedDataFragmentBinding
-import com.example.myinternationalapp.feature_display_localized.domain.model.LocalizedData
+import com.example.myinternationalapp.feature_display_localized.presentation.ShowLocalisedDataViewModel.ViewState
 import com.example.myinternationalapp.feature_display_localized.presentation.adapter.AppLocale
 import com.example.myinternationalapp.feature_display_localized.presentation.adapter.ItemClickListener
 import com.example.myinternationalapp.feature_display_localized.presentation.adapter.ShowLocalisedDataAdapter
-import com.example.myinternationalapp.feature_display_localized.presentation.model.Status
-import com.example.myinternationalapp.feature_display_localized.presentation.model.UiModel
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -48,53 +47,46 @@ class ShowLocalisedDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            showLocaleAdapter = ShowLocalisedDataAdapter(mutableListOf(), clickListener)
+            showLocaleAdapter = ShowLocalisedDataAdapter(
+                _itemList = mutableListOf(
+                    AppLocale.Title(SupportedLocale.ENGLISH.name),
+                    AppLocale.Title(SupportedLocale.SPANISH.name)
+                ),
+                onClickListener = clickListener
+            )
             layoutManager = LinearLayoutManager(context)
             adapter = showLocaleAdapter
         }
 
         lifecycleScope.launchWhenCreated {
+            activity?.let { viewModel.initializeData(it) }
             registerForUIUpdates()
         }
     }
 
     private suspend fun registerForUIUpdates() {
-        viewModel.uiState.collect {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    it.data?.let { data ->
-                        binding.data = data
-                    }
+        viewModel.viewState.collect {
+            when (it) {
+                is ViewState.LoadingState -> {
                 }
-                Status.ERROR,
-                -> {
-                    it.message?.let { message -> binding.errorInfo.text = message }
-                }
-                Status.LOADING,
-                -> {
+                is ViewState.ValueAvailableState -> {
+                    binding.data = it.uiModel
                 }
             }
-            updateUIVisibility(uiModel = it)
+            updateUIVisibility(viewState = it)
         }
     }
 
-    private fun updateUIVisibility(uiModel: UiModel<LocalizedData>) {
+    private fun updateUIVisibility(viewState: ViewState) {
         binding.apply {
-            when (uiModel.status) {
-                Status.SUCCESS -> {
-                    recyclerView.visibility = View.VISIBLE
-                    progressBar.visibility = View.GONE
-                    errorInfo.visibility = View.GONE
-                }
-                Status.ERROR -> {
-                    progressBar.visibility = View.GONE
-                    recyclerView.visibility = View.GONE
-                    errorInfo.visibility = View.VISIBLE
-                }
-                Status.LOADING -> {
+            when (viewState) {
+                is ViewState.LoadingState -> {
                     progressBar.visibility = View.VISIBLE
                     recyclerView.visibility = View.GONE
-                    errorInfo.visibility = View.GONE
+                }
+                is ViewState.ValueAvailableState -> {
+                    recyclerView.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
                 }
             }
         }

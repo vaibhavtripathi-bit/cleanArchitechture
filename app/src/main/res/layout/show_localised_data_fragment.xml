@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.myinternationalapp.feature_display_localized.domain.model.LocalizedData" />
+            type="com.example.myinternationalapp.feature_display_localized.presentation.model.ShowLocalizedUiModel" />
 
     </data>
 
@@ -31,16 +31,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/error_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
