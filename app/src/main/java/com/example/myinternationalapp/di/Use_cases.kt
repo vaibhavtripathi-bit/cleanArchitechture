@@ -7,19 +7,19 @@ import com.example.myinternationalapp.feature_display_localized.domain.use_case.
 import org.koin.dsl.module
 
 val useCases = module {
-    single {
+    factory {
         GetLocalizedDataFromLocal(get())
     }
 
-    single {
+    factory {
         GetLocalizedDataFromRemote(get())
     }
 
-    single {
+    factory {
         LocaleAvailabilityUseCase(get())
     }
 
-    single {
+    factory {
         ShowLocalizedDataUseCase(get(), get(), get())
     }
 }
