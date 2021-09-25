@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/showLocalisedDataFragment">
+
+    <fragment
+        android:id="@+id/showLocalisedDataFragment"
+        android:name="com.example.myinternationalapp.feature_display_localized.presentation.ShowLocalisedDataFragment"
+        android:label="show_localised_data_fragment"
+        tools:layout="@layout/show_localised_data_fragment" />
+</navigation>
