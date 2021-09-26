@@ -19,91 +19,17 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class LocalizedDataRepositoryImpl : LocalizedDataRepository, KoinComponent {
-
     private val localizedDao by inject<LocalizedDao>()
     private val localeApiService by inject<LocaleApiService>()
-    //TODO: Context(Dispatchers.IO) need to be part of constructor or injectable
-
-    override fun observerLocalizedData(screen: Screen, selectedLocale: SelectedLocale): Flow<LocalizedData> = flow {
-        val localizedData = getLocalizedData(selectedLocale)
-        emit(
-            LocalizedData(
-                screen = Screen.MainHelloTextScreen,
-                selectedLocale = selectedLocale,
-                localisedKeyValue = localizedData
-            )
-        )
-    }.cancellable()
-        .flowOn(Dispatchers.IO)
-
-    override suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData {
-        val localeValue = when (selectedLocale) {
-            SelectedLocale.ENGLISH -> {
-                SelectedLocale.ENGLISH.value
-            }
-            SelectedLocale.SPANISH -> {
-                SelectedLocale.SPANISH.value
-            }
-            SelectedLocale.GERMAN -> {
-                SelectedLocale.GERMAN.value
-            }
-            SelectedLocale.FRENCH -> {
-                SelectedLocale.FRENCH.value
-            }
-        }
-
-        val localisedKeyValue = LocalizedData(
-            screen = Screen.MainHelloTextScreen,
-            selectedLocale = SelectedLocale.ENGLISH,
-            localisedKeyValue = HashMap()
-        )
-        val localisation = DBLocalizeData(
-            screen = 1,
-            locale = localeValue,
-            localisation = "Ignore, since we are using mockk data"
-        )
-        localizedDao.insertLocalizedData(localisation)
-
-        localizedDao.insertSelectedLocale(
-            DBSelectedLocale(
-                locale = selectedLocale
-            )
-        )
-        return localisedKeyValue
+    override fun observerLocalizedData(screen: Screen, selectedLocale: SelectedLocale): Flow<LocalizedData> {
+        TODO("Not yet implemented")
     }
 
-    override fun getSupportedLocale(): Flow<SelectedLocale> = flow {
-        localizedDao.getSelectedLocale().collect { selectedLocale ->
-            if (selectedLocale.isNotEmpty()) {
-                emit(SelectedLocale.getSupportedLocale(selectedLocale.first().locale.name))
-            } else {
-                emit(SelectedLocale.ENGLISH)
-            }
-        }
-    }.distinctUntilChanged().cancellable()
-        .flowOn(Dispatchers.IO)
+    override suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData {
+        TODO("Not yet implemented")
+    }
 
-    private fun getLocalizedData(selectedLocale: SelectedLocale): HashMap<String, String> {
-        val localizedData = HashMap<String, String>().apply {
-            when (selectedLocale) {
-                SelectedLocale.ENGLISH -> {
-                    put("hello_world", "Hello World")
-                    put("other_world", "Other World")
-                }
-                SelectedLocale.SPANISH -> {
-                    put("hello_world", "Hola Mundo")
-                    put("other_world", "Otro mundo")
-                }
-                SelectedLocale.GERMAN -> {
-                    put("hello_world", "Hallo Welt")
-                    put("other_world", "Andere Welt")
-                }
-                SelectedLocale.FRENCH -> {
-                    put("hello_world", "Bonjour le monde")
-                    put("other_world", "Autre monde")
-                }
-            }
-        }
-        return localizedData
+    override fun getSupportedLocale(): Flow<SelectedLocale> {
+        TODO("Not yet implemented")
     }
 }
