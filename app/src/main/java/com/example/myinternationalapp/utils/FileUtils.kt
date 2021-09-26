@@ -14,7 +14,7 @@ class FileUtil<T> {
         fun <T> loadJSONResponseFromAsset(context: Context, fileName: String, responseClass: Class<T>): T? {
             var json: String? = null
             json = try {
-                val `is`: InputStream = context.getAssets().open(fileName)
+                val `is`: InputStream = context.assets.open(fileName)
                 val size = `is`.available()
                 val buffer = ByteArray(size)
                 `is`.read(buffer)
@@ -27,7 +27,7 @@ class FileUtil<T> {
             return try {
                 Gson().fromJson(json, responseClass)
             } catch (ex: JsonSyntaxException) {
-                Log.e("Exception", ex.getLocalizedMessage())
+                Log.e("Exception", ex.localizedMessage)
                 null
             }
         }

@@ -60,7 +60,6 @@ class LocalizedDataRepositoryImpl : LocalizedDataRepository, KoinComponent {
         return localizedData
     }
 
-
     override suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData {
         val localeValue = when (selectedLocale) {
             SelectedLocale.ENGLISH -> {
