@@ -98,17 +98,4 @@ class LocalizedDataRepositoryImpl : LocalizedDataRepository, KoinComponent {
         }
     }.distinctUntilChanged().cancellable()
         .flowOn(Dispatchers.IO)
-
-
-//    override suspend fun saveLocalizedData(localizedData: LocalizedData) {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun updateLocalizedData(localizedData: LocalizedData): LocalizedData? {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun deleteLocalizedData(localizedData: LocalizedData) {
-//        TODO("Not yet implemented")
-//    }
 }

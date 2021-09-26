@@ -12,10 +12,4 @@ interface LocalizedDataRepository {
     suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData
 
     fun getSupportedLocale(): Flow<SelectedLocale>
-
-//    suspend fun saveLocalizedData(localizedData: LocalizedData)
-//
-//    suspend fun updateLocalizedData(localizedData: LocalizedData): LocalizedData?
-//
-//    suspend fun deleteLocalizedData(localizedData: LocalizedData)
 }

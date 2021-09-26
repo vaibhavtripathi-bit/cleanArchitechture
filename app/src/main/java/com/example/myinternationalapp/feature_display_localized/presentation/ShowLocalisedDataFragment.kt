@@ -28,7 +28,7 @@ class ShowLocalisedDataFragment : Fragment() {
         override fun clickListener(itemView: View, item: AppLocale, position: Int) {
             when (item) {
                 is AppLocale.Title -> {
-                    activity?.let { viewModel.loadDataFromLocale(it, item.title) }
+                    viewModel.loadDataFromLocale(item.title)
                 }
             }
         }

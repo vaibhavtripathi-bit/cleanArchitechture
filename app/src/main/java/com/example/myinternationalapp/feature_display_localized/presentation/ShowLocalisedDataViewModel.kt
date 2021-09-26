@@ -43,7 +43,7 @@ class ShowLocalisedDataViewModel(
         }
     }
 
-    fun loadDataFromLocale(context: Context, title: String) {
+    fun loadDataFromLocale(title: String) {
         val supportedLocale = SelectedLocale.getSupportedLocale(title)
         viewModelScope.launch {
             if (!localizedDataUseCase.localeAvailabilityUseCase(title)) {
