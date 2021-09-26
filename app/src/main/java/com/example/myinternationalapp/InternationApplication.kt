@@ -1,6 +1,7 @@
 package com.example.myinternationalapp
 
 import android.app.Application
+import com.example.myinternationalapp.di.appComponent
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,5 +22,5 @@ class InternationApplication : Application() {
     }
 
     //List of Koin dependencies
-    fun provideDependency() = appComponent
+    private fun provideDependency() = appComponent
 }

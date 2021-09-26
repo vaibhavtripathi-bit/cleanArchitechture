@@ -2,6 +2,6 @@ package com.example.myinternationalapp.module.feature_display_localized.data.con
 
 
 object Constants {
-    val BASE_URL: String = ""
+    const val BASE_URL: String = ""
     const val DATABASE_NAME = "localizedAppDatabase"
 }
