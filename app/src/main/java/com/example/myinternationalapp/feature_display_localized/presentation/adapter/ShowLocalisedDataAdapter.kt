@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myinternationalapp.R
-import com.example.myinternationalapp.databinding.ItemShowlocaleTitleBinding
+import com.example.myinternationalapp.databinding.ItemShowLocaleTitleBinding
 
 class ShowLocalisedDataAdapter(
     private var _itemList: MutableList<AppLocale>,
@@ -13,9 +13,9 @@ class ShowLocalisedDataAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowLocalisedDataViewHolder {
         return when (viewType) {
-            R.layout.item_showlocale_title -> {
+            R.layout.item_show_locale_title -> {
                 ShowLocalisedDataViewHolder.SelectLocaleViewHolder(
-                    ItemShowlocaleTitleBinding.inflate(
+                    ItemShowLocaleTitleBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -38,7 +38,7 @@ class ShowLocalisedDataAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (_itemList[position]) {
-            is AppLocale.Title -> R.layout.item_showlocale_title
+            is AppLocale.Title -> R.layout.item_show_locale_title
         }
     }
 }

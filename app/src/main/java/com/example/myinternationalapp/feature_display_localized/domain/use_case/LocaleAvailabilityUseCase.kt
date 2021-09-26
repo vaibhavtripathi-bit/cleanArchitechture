@@ -9,6 +9,6 @@ class LocaleAvailabilityUseCase(
 ) {
 
     suspend operator fun invoke(supportedLocale: String): Boolean {
-        return true
+        return false
     }
 }

@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myinternationalapp.R
 import com.example.myinternationalapp.data.Screen
-import com.example.myinternationalapp.data.SupportedLocale
+import com.example.myinternationalapp.data.SelectedLocale
+import com.example.myinternationalapp.feature_display_localized.data.constant.LocalizedKeyConstant.Companion.HelloTextScreen
 import com.example.myinternationalapp.feature_display_localized.domain.use_case.ShowLocalizedDataUseCase
 import com.example.myinternationalapp.feature_display_localized.presentation.model.ShowLocalizedUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,31 +22,34 @@ class ShowLocalisedDataViewModel(
     val viewState: StateFlow<ViewState> = _viewState
 
     fun initializeData(context: Context) {
-        val titleValue = context.resources.getString(R.string.hello_world)
         viewModelScope.launch {
-            localizedDataUseCase.getLocalizedDataFromLocal(
-                screen = Screen.MainHelloTextScreen,
-                supportedLocale = localizedDataUseCase.getGetSelectedLocaleUseCase()
-            ).collect {
-                // update localized values of all model classes here.
-                updateViewState(
-                    ViewState.ValueAvailableState(
-                        ShowLocalizedUiModel(
-                            it.getValueForKey(titleValue) ?: titleValue
+            localizedDataUseCase.getGetSelectedLocaleUseCase().collect {
+                localizedDataUseCase.getLocalizedDataFromLocal(
+                    screen = Screen.MainHelloTextScreen,
+                    selectedLocale = it
+                ).collect {
+                    // update localized values of all model classes here.
+                    updateViewState(
+                        ViewState.ValueAvailableState(
+                            ShowLocalizedUiModel(
+                                it.getValueForKey(
+                                    HelloTextScreen.hello_world
+                                ) ?: context.resources.getString(R.string.hello_world)
+                            )
                         )
                     )
-                )
+                }
             }
         }
     }
 
-    fun loadDataFromLocale(title: String) {
-        val supportedLocale = SupportedLocale.getSupportedLocale(title)
+    fun loadDataFromLocale(context: Context, title: String) {
+        val supportedLocale = SelectedLocale.getSupportedLocale(title)
         viewModelScope.launch {
             if (!localizedDataUseCase.localeAvailabilityUseCase(title)) {
                 localizedDataUseCase.getLocalizedDataFromRemote(
                     screen = Screen.MainHelloTextScreen,
-                    supportedLocale = supportedLocale
+                    selectedLocale = supportedLocale
                 )
             }
         }

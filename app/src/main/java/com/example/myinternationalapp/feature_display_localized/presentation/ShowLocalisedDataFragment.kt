@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myinternationalapp.R
-import com.example.myinternationalapp.data.SupportedLocale
+import com.example.myinternationalapp.data.SelectedLocale
 import com.example.myinternationalapp.databinding.ShowLocalisedDataFragmentBinding
 import com.example.myinternationalapp.feature_display_localized.presentation.ShowLocalisedDataViewModel.ViewState
 import com.example.myinternationalapp.feature_display_localized.presentation.adapter.AppLocale
@@ -29,7 +28,7 @@ class ShowLocalisedDataFragment : Fragment() {
         override fun clickListener(itemView: View, item: AppLocale, position: Int) {
             when (item) {
                 is AppLocale.Title -> {
-                    viewModel.loadDataFromLocale(item.title)
+                    activity?.let { viewModel.loadDataFromLocale(it, item.title) }
                 }
             }
         }
@@ -49,12 +48,13 @@ class ShowLocalisedDataFragment : Fragment() {
             setHasFixedSize(true)
             showLocaleAdapter = ShowLocalisedDataAdapter(
                 _itemList = mutableListOf(
-                    AppLocale.Title(SupportedLocale.ENGLISH.name),
-                    AppLocale.Title(SupportedLocale.SPANISH.name)
+                    AppLocale.Title(SelectedLocale.ENGLISH.name),
+                    AppLocale.Title(SelectedLocale.GERMAN.name),
+                    AppLocale.Title(SelectedLocale.FRENCH.name),
+                    AppLocale.Title(SelectedLocale.SPANISH.name)
                 ),
                 onClickListener = clickListener
             )
-            layoutManager = LinearLayoutManager(context)
             adapter = showLocaleAdapter
         }
 

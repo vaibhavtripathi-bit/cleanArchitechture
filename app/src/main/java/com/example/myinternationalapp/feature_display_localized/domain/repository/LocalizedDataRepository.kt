@@ -1,14 +1,17 @@
 package com.example.myinternationalapp.feature_display_localized.domain.repository
 
 import com.example.myinternationalapp.data.Screen
-import com.example.myinternationalapp.data.SupportedLocale
+import com.example.myinternationalapp.data.SelectedLocale
+import com.example.myinternationalapp.feature_display_localized.data.local.db.entity.DBSelectedLocale
 import com.example.myinternationalapp.feature_display_localized.domain.model.LocalizedData
 import kotlinx.coroutines.flow.Flow
 
 interface LocalizedDataRepository {
-    fun observerLocalizedData(screen: Screen, supportedLocale: SupportedLocale): Flow<LocalizedData>
+    fun observerLocalizedData(screen: Screen, selectedLocale: SelectedLocale): Flow<LocalizedData>
 
-    suspend fun fetchLocalizedDataFromRemote(screen: Screen, supportedLocale: SupportedLocale): LocalizedData
+    suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData
+
+    fun getSupportedLocale(): Flow<SelectedLocale>
 
 //    suspend fun saveLocalizedData(localizedData: LocalizedData)
 //
