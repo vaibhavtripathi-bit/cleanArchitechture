@@ -27,12 +27,12 @@ class ShowLocalisedDataViewModel(
                 localizedDataUseCase.getLocalizedDataFromLocal(
                     screen = Screen.MainHelloTextScreen,
                     selectedLocale = it
-                ).collect {
+                ).collect { locaizedData ->
                     // update localized values of all model classes here.
                     updateViewState(
                         ViewState.ValueAvailableState(
                             ShowLocalizedUiModel(
-                                it.getValueForKey(
+                                locaizedData.getValueForKey(
                                     HelloTextScreen.other_world
                                 ) ?: context.resources.getString(R.string.other_world)
                             )
