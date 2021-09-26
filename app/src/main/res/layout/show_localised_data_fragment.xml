@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.myinternationalapp.feature_display_localized.presentation.model.ShowLocalizedUiModel" />
+            type="com.example.myinternationalapp.module.feature_display_localized.presentation.model.ShowLocalizedUiModel" />
 
     </data>
 
@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        tools:context=".feature_display_localized.presentation.ShowLocalisedDataFragment" >
+        tools:context=".module.feature_display_localized.presentation.ShowLocalisedDataFragment" >
 
         <TextView
             android:id="@+id/hello_title"

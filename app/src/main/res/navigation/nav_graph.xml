@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/showLocalisedDataFragment"
-        android:name="com.example.myinternationalapp.feature_display_localized.presentation.ShowLocalisedDataFragment"
+        android:name="com.example.myinternationalapp.module.feature_display_localized.presentation.ShowLocalisedDataFragment"
         android:label="show_localised_data_fragment"
         tools:layout="@layout/show_localised_data_fragment" />
 </navigation>

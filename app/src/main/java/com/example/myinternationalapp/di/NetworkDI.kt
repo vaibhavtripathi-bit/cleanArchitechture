@@ -1,7 +1,7 @@
 package com.example.myinternationalapp.di
 
-import com.example.myinternationalapp.feature_display_localized.data.constant.Constants
-import com.example.myinternationalapp.feature_display_localized.data.network.apiservices.LocaleApiService
+import com.example.myinternationalapp.module.feature_display_localized.data.constant.Constants
+import com.example.myinternationalapp.module.feature_display_localized.data.network.apiservices.LocaleApiService
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

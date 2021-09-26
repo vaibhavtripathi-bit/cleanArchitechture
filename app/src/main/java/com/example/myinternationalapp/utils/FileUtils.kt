@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import java.io.IOException
 import java.io.InputStream
-
+// Added to read data from local to mock the data from API.
 class FileUtil<T> {
 
     companion object {
