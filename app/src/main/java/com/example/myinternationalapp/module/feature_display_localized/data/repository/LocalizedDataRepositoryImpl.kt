@@ -36,30 +36,6 @@ class LocalizedDataRepositoryImpl : LocalizedDataRepository, KoinComponent {
     }.cancellable()
         .flowOn(Dispatchers.IO)
 
-    private fun getLocalizedData(selectedLocale: SelectedLocale): HashMap<String, String> {
-        val localizedData = HashMap<String, String>().apply {
-            when (selectedLocale) {
-                SelectedLocale.ENGLISH -> {
-                    put("hello_world", "Hello World")
-                    put("other_world", "Other World")
-                }
-                SelectedLocale.SPANISH -> {
-                    put("hello_world", "Hola Mundo")
-                    put("other_world", "Otro mundo")
-                }
-                SelectedLocale.GERMAN -> {
-                    put("hello_world", "Hallo Welt")
-                    put("other_world", "Andere Welt")
-                }
-                SelectedLocale.FRENCH -> {
-                    put("hello_world", "Bonjour le monde")
-                    put("other_world", "Autre monde")
-                }
-            }
-        }
-        return localizedData
-    }
-
     override suspend fun fetchLocalizedDataFromRemote(screen: Screen, selectedLocale: SelectedLocale): LocalizedData {
         val localeValue = when (selectedLocale) {
             SelectedLocale.ENGLISH -> {
@@ -106,4 +82,28 @@ class LocalizedDataRepositoryImpl : LocalizedDataRepository, KoinComponent {
         }
     }.distinctUntilChanged().cancellable()
         .flowOn(Dispatchers.IO)
+
+    private fun getLocalizedData(selectedLocale: SelectedLocale): HashMap<String, String> {
+        val localizedData = HashMap<String, String>().apply {
+            when (selectedLocale) {
+                SelectedLocale.ENGLISH -> {
+                    put("hello_world", "Hello World")
+                    put("other_world", "Other World")
+                }
+                SelectedLocale.SPANISH -> {
+                    put("hello_world", "Hola Mundo")
+                    put("other_world", "Otro mundo")
+                }
+                SelectedLocale.GERMAN -> {
+                    put("hello_world", "Hallo Welt")
+                    put("other_world", "Andere Welt")
+                }
+                SelectedLocale.FRENCH -> {
+                    put("hello_world", "Bonjour le monde")
+                    put("other_world", "Autre monde")
+                }
+            }
+        }
+        return localizedData
+    }
 }

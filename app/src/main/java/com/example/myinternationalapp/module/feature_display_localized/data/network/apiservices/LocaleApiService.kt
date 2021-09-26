@@ -11,5 +11,4 @@ interface LocaleApiService {
         @Query("screen") searchQuery: String,
         @Query("localization") apiKey: String
     ): LocalisedDataResponse
-
 }

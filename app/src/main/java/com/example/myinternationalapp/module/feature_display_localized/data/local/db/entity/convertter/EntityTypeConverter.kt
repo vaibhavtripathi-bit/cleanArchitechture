@@ -44,5 +44,4 @@ object EntityTypeConverter {
     @TypeConverter
     fun fromHashMap(value: Map<String, String>): String =
         Gson().toJson(value)
-
 }

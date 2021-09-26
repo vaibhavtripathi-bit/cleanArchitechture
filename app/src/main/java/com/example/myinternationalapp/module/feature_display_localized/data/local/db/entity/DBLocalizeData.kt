@@ -2,6 +2,7 @@ package com.example.myinternationalapp.module.feature_display_localized.data.loc
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 //TODO : Make localisation as hashmap and modify the EntityTypeConverter to support this change.
 @Entity
 class DBLocalizeData(

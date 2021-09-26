@@ -31,5 +31,4 @@ interface LocalizedDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSelectedLocale(locale: DBSelectedLocale)
-
 }
